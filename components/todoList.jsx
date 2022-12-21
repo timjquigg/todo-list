@@ -1,34 +1,32 @@
 import TodoListItem from "./todoListItem";
 import { List } from "@mui/material";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import IconButton from "@mui/material/IconButton";
 
-const data = [
-  {
-    id: 1,
-    description: "Do Laundry",
-    completed: false,
-  },
-  {
-    id: 2,
-    description: "Wash Dishes",
-    completed: true,
-  },
-  {
-    id: 3,
-    description: "Walk Dog",
-    completed: false,
-  },
-];
+export default function TodoList(props) {
+  // console.log(props, "TodoList");
+  const items = Object.values(props.todoList)
+    .filter((item) => item.completed === props.completed)
+    .map((item) => {
+      return (
+        <TodoListItem
+          key={item.id}
+          id={item.id}
+          description={item.description}
+          toggleComplete={props.setCompleted}
+          completed={item.completed}
+        />
+      );
+    });
 
-export default function TodoList() {
-  const items = data.map((item) => {
-    return (
-      <TodoListItem
-        key={item.id}
-        description={item.description}
-        completed={item.completed}
-      />
-    );
-  });
-
-  return <List>{items}</List>;
+  return (
+    <List>
+      {items}
+      {!props.completed && (
+        <IconButton color="primary">
+          <AddTaskIcon />
+        </IconButton>
+      )}
+    </List>
+  );
 }
