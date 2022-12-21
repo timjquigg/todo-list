@@ -24,6 +24,16 @@ export default function Index(props) {
     });
   };
 
+  const deleteItem = (id) => {
+    console.log("Delete", id);
+    setTodoList((prev) => {
+      const newTodoList = { ...prev };
+
+      delete newTodoList[id];
+      return newTodoList;
+    });
+  };
+
   return (
     <Container maxWidth="xs">
       <Header />
@@ -35,6 +45,7 @@ export default function Index(props) {
           todoList={todoList}
           completed={false}
           setCompleted={toggleComplete}
+          deleteItem={deleteItem}
         />
 
         <Typography variant="h6" component="h2" gutterBottom>
@@ -44,6 +55,7 @@ export default function Index(props) {
           todoList={todoList}
           completed={true}
           setCompleted={toggleComplete}
+          deleteItem={deleteItem}
         />
       </Box>
       <Footer />

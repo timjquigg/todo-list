@@ -1,4 +1,4 @@
-import { Checkbox, Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import TextField from "@mui/material/TextField";
@@ -18,13 +18,10 @@ export default function TodoListItem(props) {
         value={props.description}
         onChange={props.handleChange}
       />
-      <TextField value={props.completed} />
-      <TextField value={props.id} />
       <ButtonGroup>
         <IconButton
           value={props.id}
           onClick={(e) => {
-            console.log(e.currentTarget);
             props.toggleComplete(e.currentTarget.value);
           }}
         >
@@ -34,7 +31,14 @@ export default function TodoListItem(props) {
             <TaskAltIcon value={props.id} color="primary" />
           )}
         </IconButton>
-        <IconButton aria-label="delete" color="error">
+        <IconButton
+          aria-label="delete"
+          color="error"
+          value={props.id}
+          onClick={(e) => {
+            props.deleteItem(e.currentTarget.value);
+          }}
+        >
           <DeleteIcon />
         </IconButton>
       </ButtonGroup>

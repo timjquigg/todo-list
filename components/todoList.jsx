@@ -15,6 +15,7 @@ export default function TodoList(props) {
           description={item.description}
           toggleComplete={props.setCompleted}
           completed={item.completed}
+          deleteItem={props.deleteItem}
         />
       );
     });
