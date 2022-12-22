@@ -8,31 +8,14 @@ import TodoList from "../components/todoList";
 import Footer from "../components/footer";
 import { Typography } from "@mui/material";
 import { getData } from "./api/todo";
+import useTodoListData from "../hooks/useTodoListData";
 
 export default function Index(props) {
   const todoListObj = {};
   JSON.parse(props.data).forEach((item) => (todoListObj[item.id] = item));
-  const [todoList, setTodoList] = useState(todoListObj);
 
-  const toggleComplete = (id) => {
-    console.log("complete", id);
-    setTodoList((prev) => {
-      const newTodoList = { ...prev };
-
-      newTodoList[id].completed = !newTodoList[id].completed;
-      return newTodoList;
-    });
-  };
-
-  const deleteItem = (id) => {
-    console.log("Delete", id);
-    setTodoList((prev) => {
-      const newTodoList = { ...prev };
-
-      delete newTodoList[id];
-      return newTodoList;
-    });
-  };
+  const { todoList, toggleComplete, deleteItem, addItem } =
+    useTodoListData(todoListObj);
 
   return (
     <Container maxWidth="xs">
@@ -46,6 +29,7 @@ export default function Index(props) {
           completed={false}
           setCompleted={toggleComplete}
           deleteItem={deleteItem}
+          addItem={addItem}
         />
 
         <Typography variant="h6" component="h2" gutterBottom>
@@ -56,6 +40,7 @@ export default function Index(props) {
           completed={true}
           setCompleted={toggleComplete}
           deleteItem={deleteItem}
+          addItem={addItem}
         />
       </Box>
       <Footer />

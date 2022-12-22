@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const data = [
+export const data = [
   {
     id: 1,
     description: "Do Laundry",
@@ -24,8 +24,18 @@ export async function getData() {
 }
 
 export default async function handler(req, res) {
-  if (req.method === "GET") {
-    const jsonData = await getData();
-    res.status(200).json(jsonData);
+  switch (req.method) {
+    case "GET":
+      const jsonData = await getData();
+      res.status(200).json(jsonData);
+      break;
+
+    case "POST":
+      const ids = data.map((el) => el.id).sort((a, b) => a - b);
+      const newId = ids.slice(-1)[0] + 1;
+      data.push({ id: newId, description: "", completed: false });
+
+      res.status(200).send(data.slice(-1)[0]);
+      break;
   }
 }

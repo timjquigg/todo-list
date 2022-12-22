@@ -24,7 +24,7 @@ export default function TodoList(props) {
     <List>
       {items}
       {!props.completed && (
-        <IconButton color="primary">
+        <IconButton color="primary" onClick={() => props.addItem()}>
           <AddTaskIcon />
         </IconButton>
       )}
