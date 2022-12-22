@@ -31,9 +31,14 @@ export default async function handler(req, res) {
       break;
 
     case "POST":
+      console.log(req.body);
       const ids = data.map((el) => el.id).sort((a, b) => a - b);
       const newId = ids.slice(-1)[0] + 1;
-      data.push({ id: newId, description: "", completed: false });
+      data.push({
+        id: newId,
+        description: req.body.description,
+        completed: false,
+      });
 
       res.status(200).send(data.slice(-1)[0]);
       break;

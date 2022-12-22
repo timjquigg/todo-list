@@ -51,9 +51,13 @@ export default function useTodoListData(todoListObj) {
       });
   };
 
-  const addItem = () => {
-    axios.post("/api/todo", {}).then((res) => {
-      console.log(res);
+  // const addItem = () => {
+  //
+  // };
+
+  const saveItem = (description) => {
+    axios.post("/api/todo", { description }).then((res) => {
+      console.log(res.data);
       setTodoList((prev) => {
         const newTodoList = { ...prev };
         newTodoList[res.data.id] = res.data;
@@ -66,6 +70,7 @@ export default function useTodoListData(todoListObj) {
     todoList,
     toggleComplete,
     deleteItem,
-    addItem,
+    // addItem,
+    saveItem,
   };
 }

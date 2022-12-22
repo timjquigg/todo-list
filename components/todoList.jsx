@@ -2,6 +2,7 @@ import TodoListItem from "./todoListItem";
 import { List } from "@mui/material";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import IconButton from "@mui/material/IconButton";
+import NewTodo from "./newTodo";
 
 export default function TodoList(props) {
   // console.log(props, "TodoList");
@@ -24,9 +25,12 @@ export default function TodoList(props) {
     <List>
       {items}
       {!props.completed && (
-        <IconButton color="primary" onClick={() => props.addItem()}>
-          <AddTaskIcon />
-        </IconButton>
+        // <>
+        // <IconButton color="primary" onClick={() => props.addItem()}>
+        // <AddTaskIcon />
+        // </IconButton>
+        <NewTodo saveItem={props.saveItem} />
+        // </>
       )}
     </List>
   );
