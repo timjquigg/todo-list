@@ -14,6 +14,7 @@ This is a simple Todo list application created to practice using new React frame
 1. Install all dependencies with `npm install`.
 2. Create a copy of .env.sample and save as .env.local
 3. Run postgres server and create a new database for project. Update database connection details in .env.local
+4. run `npm run reset` to reset the database tables & seed with sample data.
 
 ## Running Development Server
 
