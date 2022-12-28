@@ -5,9 +5,55 @@ import TextField from "@mui/material/TextField";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
+import InputAdornment from "@mui/material/InputAdornment";
+import SaveIcon from "@mui/icons-material/Save";
+import { useState } from "react";
 
 export default function TodoListItem(props) {
-  // console.log(props.id, "TodoListItem");
+  // console.log(props, "TodoListItem");
+
+  const [description, setDescription] = useState(props.description);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleChange = (value) => {
+    setDescription(value);
+  };
+
+  const validate = (e) => {
+    setIsSelected(false);
+    if (description !== "") {
+      props.saveItem(props.id, description);
+      return;
+    }
+    setDescription(props.description);
+  };
+
+  const cancel = (e) => {
+    const currentTarget = e.currentTarget;
+    const nextElementSibling = currentTarget.nextElementSibling;
+
+    requestAnimationFrame(() => {
+      // Check if the new focused element is a child of the original container
+      if (!nextElementSibling.contains(document.activeElement)) {
+        // Do blur logic here!
+        setDescription(props.description);
+        setIsSelected(false);
+      }
+    });
+  };
+
+  const iconAdornment = isSelected
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton aria-label="save" onClick={(e) => validate(e)}>
+              <SaveIcon />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }
+    : {};
+
   return (
     <Stack direction="row" spacing={2} sx={{ my: 2 }}>
       <TextField
@@ -15,8 +61,11 @@ export default function TodoListItem(props) {
         label="todo"
         color="primary"
         fullWidth
-        value={props.description}
-        onChange={props.handleChange}
+        value={description}
+        onChange={(e) => handleChange(e.target.value)}
+        InputProps={iconAdornment}
+        onFocus={() => setIsSelected(true)}
+        onBlur={(e) => cancel(e)}
       />
       <ButtonGroup>
         <IconButton

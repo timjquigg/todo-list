@@ -17,6 +17,7 @@ export default function TodoList(props) {
           toggleComplete={props.setCompleted}
           completed={item.completed}
           deleteItem={props.deleteItem}
+          saveItem={props.saveItem}
         />
       );
     });
@@ -24,14 +25,7 @@ export default function TodoList(props) {
   return (
     <List>
       {items}
-      {!props.completed && (
-        // <>
-        // <IconButton color="primary" onClick={() => props.addItem()}>
-        // <AddTaskIcon />
-        // </IconButton>
-        <NewTodo saveItem={props.saveItem} />
-        // </>
-      )}
+      {!props.completed && <NewTodo addItem={props.addItem} />}
     </List>
   );
 }

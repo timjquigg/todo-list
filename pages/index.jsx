@@ -14,7 +14,7 @@ export default function Index(props) {
   const todoListObj = {};
   JSON.parse(props.data).forEach((item) => (todoListObj[item.id] = item));
 
-  const { todoList, toggleComplete, deleteItem, saveItem } =
+  const { todoList, toggleComplete, deleteItem, addItem, saveItem } =
     useTodoListData(todoListObj);
 
   return (
@@ -29,6 +29,7 @@ export default function Index(props) {
           completed={false}
           setCompleted={toggleComplete}
           deleteItem={deleteItem}
+          addItem={addItem}
           saveItem={saveItem}
         />
 
@@ -40,7 +41,7 @@ export default function Index(props) {
           completed={true}
           setCompleted={toggleComplete}
           deleteItem={deleteItem}
-          // saveItem={saveItem}
+          saveItem={saveItem}
         />
       </Box>
       <Footer />

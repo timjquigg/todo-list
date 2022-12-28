@@ -51,11 +51,7 @@ export default function useTodoListData(todoListObj) {
       });
   };
 
-  // const addItem = () => {
-  //
-  // };
-
-  const saveItem = (description) => {
+  const addItem = (description) => {
     axios.post("/api/todo", { description }).then((res) => {
       console.log(res.data);
       setTodoList((prev) => {
@@ -66,11 +62,22 @@ export default function useTodoListData(todoListObj) {
     });
   };
 
+  const saveItem = (id, description) => {
+    axios.put(`/api/todo/${id}`, { description }).then((res) => {
+      console.log(res.data);
+      setTodoList((prev) => {
+        const newTodoList = { ...prev };
+        newTodoList[id].description = description;
+        return newTodoList;
+      });
+    });
+  };
+
   return {
     todoList,
     toggleComplete,
     deleteItem,
-    // addItem,
+    addItem,
     saveItem,
   };
 }

@@ -7,12 +7,11 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
 
 export default function newTodo(props) {
-  // console.log(props.id, "newTodo");
   const [description, setDescription] = useState("");
 
   const validate = () => {
     if (description !== "") {
-      props.saveItem(description);
+      props.addItem(description);
       setDescription("");
     }
   };
