@@ -17,10 +17,8 @@ export default function useTodoListData(todoListObj) {
   const [todoList, setTodoList] = useState(todoListObj);
 
   const toggleComplete = (id) => {
-    console.log("complete", id);
-
     axios
-      .put("/api/todo/id", {
+      .put(`/api/todo/${id}`, {
         id,
         completed: !todoList[id].completed,
       })
@@ -38,7 +36,7 @@ export default function useTodoListData(todoListObj) {
     console.log("Delete", id);
 
     axios
-      .delete("/api/todo/id", {
+      .delete(`/api/todo/${id}`, {
         id,
       })
       .then(() => {
@@ -63,8 +61,7 @@ export default function useTodoListData(todoListObj) {
   };
 
   const saveItem = (id, description) => {
-    axios.put(`/api/todo/${id}`, { description }).then((res) => {
-      console.log(res.data);
+    axios.put(`/api/todo/${id}`, { description }).then(() => {
       setTodoList((prev) => {
         const newTodoList = { ...prev };
         newTodoList[id].description = description;

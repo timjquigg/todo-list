@@ -1,22 +1,38 @@
-import data from "../todo";
+import {
+  deleteTodo,
+  getTodoById,
+  toggleComplete,
+  updateTodo,
+} from "../../../db/queries";
 
 export default async function handler(req, res) {
-  switch (req.method) {
-    case "GET":
-      const jsonData = JSON.stringify(
-        data.filter((item) => item.id === req.params)
-      );
-      res.status(200).json(jsonData);
-      break;
+  const id = req.query.id;
 
-    case "PUT":
-      console.log(req.body);
-      res.send();
-      break;
+  if (req.method === "GET") {
+    const data = getTodoById(id);
+    res.status(200).json(data);
+    return;
+  }
 
-    case "DELETE":
-      console.log(req.body);
+  if (req.method === "PUT") {
+    const description = req.body.description;
+    const completed = req.body.completed;
+
+    if (description) {
+      await updateTodo(id, description);
       res.send();
-      break;
+      return;
+    }
+    if (!description) {
+      toggleComplete(id, completed);
+      res.send();
+      return;
+    }
+  }
+
+  if (req.method === "DELETE") {
+    await deleteTodo(id);
+    res.send();
+    return;
   }
 }
