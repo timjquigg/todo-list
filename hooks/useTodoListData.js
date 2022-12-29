@@ -1,17 +1,7 @@
 import axios from "axios";
-import useSWR from "swr";
 import { useState } from "react";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
-
-const fetecher = async (url) => {
-  try {
-    const res = await axios.get(url);
-    return res.data;
-  } catch (err) {
-    throw err.response.data;
-  }
-};
 
 export default function useTodoListData(todoListObj) {
   const [todoList, setTodoList] = useState(todoListObj);

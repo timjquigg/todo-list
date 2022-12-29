@@ -46,7 +46,11 @@ export default function TodoListItem(props) {
     ? {
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton aria-label="save" onClick={(e) => validate(e)}>
+            <IconButton
+              aria-label="save"
+              color="primary"
+              onClick={(e) => validate(e)}
+            >
               <SaveIcon />
             </IconButton>
           </InputAdornment>
