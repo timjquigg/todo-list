@@ -8,6 +8,7 @@ import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
+import { Tooltip } from "@mui/material";
 
 export default function TodoListItem(props) {
   // console.log(props, "TodoListItem");
@@ -46,13 +47,15 @@ export default function TodoListItem(props) {
     ? {
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              aria-label="save"
-              color="primary"
-              onClick={(e) => validate(e)}
-            >
-              <SaveIcon />
-            </IconButton>
+            <Tooltip title="Save">
+              <IconButton
+                aria-label="save"
+                color="primary"
+                onClick={(e) => validate(e)}
+              >
+                <SaveIcon />
+              </IconButton>
+            </Tooltip>
           </InputAdornment>
         ),
       }
@@ -73,28 +76,32 @@ export default function TodoListItem(props) {
         onBlur={(e) => cancel(e)}
       />
       <ButtonGroup>
-        <IconButton
-          value={props.id}
-          onClick={(e) => {
-            props.toggleComplete(e.currentTarget.value);
-          }}
-        >
-          {props.completed ? (
-            <RemoveDoneIcon value={props.id} color="primary" />
-          ) : (
-            <TaskAltIcon value={props.id} color="primary" />
-          )}
-        </IconButton>
-        <IconButton
-          aria-label="delete"
-          color="error"
-          value={props.id}
-          onClick={(e) => {
-            props.deleteItem(e.currentTarget.value);
-          }}
-        >
-          <DeleteIcon />
-        </IconButton>
+        <Tooltip title={props.completed ? "Un-complete" : "Complete"}>
+          <IconButton
+            value={props.id}
+            onClick={(e) => {
+              props.toggleComplete(e.currentTarget.value);
+            }}
+          >
+            {props.completed ? (
+              <RemoveDoneIcon value={props.id} color="primary" />
+            ) : (
+              <TaskAltIcon value={props.id} color="primary" />
+            )}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Delete">
+          <IconButton
+            aria-label="delete"
+            color="error"
+            value={props.id}
+            onClick={(e) => {
+              props.deleteItem(e.currentTarget.value);
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </ButtonGroup>
     </Stack>
   );
