@@ -6,7 +6,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
 
-export default function newTodo(props) {
+export default function NewTodo(props) {
   const [description, setDescription] = useState("");
 
   const validate = () => {

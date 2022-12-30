@@ -1,7 +1,5 @@
 import TodoListItem from "./todoListItem";
 import { List } from "@mui/material";
-import AddTaskIcon from "@mui/icons-material/AddTask";
-import IconButton from "@mui/material/IconButton";
 import NewTodo from "./newTodo";
 
 export default function TodoList(props) {
