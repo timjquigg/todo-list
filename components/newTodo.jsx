@@ -27,6 +27,7 @@ export default function NewTodo(props) {
         label="New todo"
         color="primary"
         fullWidth
+        multiline
         value={description}
         onChange={(event) => setDescription(event.target.value)}
       />

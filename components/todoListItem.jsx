@@ -65,6 +65,7 @@ export default function TodoListItem(props) {
         label="todo"
         color="primary"
         fullWidth
+        multiline
         value={description}
         onChange={(e) => handleChange(e.target.value)}
         InputProps={iconAdornment}
