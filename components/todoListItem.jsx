@@ -37,7 +37,6 @@ export default function TodoListItem(props) {
       // Check if the new focused element is a child of the original container
       if (!nextElementSibling2.contains(document.activeElement)) {
         // Do blur logic here!
-        console.log("hello");
         setDescription(props.description);
         setIsSelected(false);
       }

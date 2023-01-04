@@ -23,8 +23,6 @@ export default function useTodoListData(todoListObj) {
   };
 
   const deleteItem = (id) => {
-    console.log("Delete", id);
-
     axios
       .delete(`/api/todo/${id}`, {
         id,
@@ -41,7 +39,6 @@ export default function useTodoListData(todoListObj) {
 
   const addItem = (description) => {
     axios.post("/api/todo", { description }).then((res) => {
-      console.log(res.data);
       setTodoList((prev) => {
         const newTodoList = { ...prev };
         newTodoList[res.data.id] = res.data;
