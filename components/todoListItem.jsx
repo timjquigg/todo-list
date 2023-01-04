@@ -32,10 +32,11 @@ export default function TodoListItem(props) {
   const cancel = (e) => {
     const currentTarget = e.currentTarget;
     const nextElementSibling = currentTarget.nextElementSibling;
+    const nextElementSibling2 = nextElementSibling.nextElementSibling;
 
     requestAnimationFrame(() => {
       // Check if the new focused element is a child of the original container
-      if (!nextElementSibling.contains(document.activeElement)) {
+      if (!nextElementSibling2.contains(document.activeElement)) {
         // Do blur logic here!
         setDescription(props.description);
         setIsSelected(false);

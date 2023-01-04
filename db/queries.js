@@ -3,7 +3,7 @@ import pg from ".";
 export async function getTodos() {
   const queryString = `
     SELECT * 
-    FROM todos;
+    FROM "Todo";
   `;
   const data = await pg.query(queryString);
   return data.rows;
@@ -11,7 +11,7 @@ export async function getTodos() {
 
 export async function createTodo(description) {
   const queryString = `
-    INSERT INTO todos 
+    INSERT INTO "Todo" 
     (description)
     VALUES ($1)
     RETURNING *;
@@ -24,7 +24,7 @@ export async function createTodo(description) {
 export async function getTodoById(id) {
   const queryString = `
     SELECT * 
-    FROM todos 
+    FROM "Todo" 
     WHERE id = $1;
   `;
   const queryParams = [id];
@@ -34,7 +34,7 @@ export async function getTodoById(id) {
 
 export async function updateTodo(id, description) {
   const queryString = `
-    UPDATE todos
+    UPDATE "Todo"
     SET description = $1
     WHERE id = $2;
   `;
@@ -44,7 +44,7 @@ export async function updateTodo(id, description) {
 
 export async function deleteTodo(id) {
   const queryString = `
-    DELETE FROM todos
+    DELETE FROM "Todo"
     WHERE id = $1;
   `;
   const queryParams = [id];
@@ -53,7 +53,7 @@ export async function deleteTodo(id) {
 
 export async function toggleComplete(id, completed) {
   const queryString = `
-    UPDATE todos
+    UPDATE "Todo"
     SET completed = $1
     WHERE id = $2;
     `;
