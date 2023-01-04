@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const id = req.query.id;
 
   if (req.method === "GET") {
-    const data = getTodoById(id);
+    const data = await getTodoById(id);
     res.status(200).json(data);
     return;
   }
@@ -19,6 +19,7 @@ export default async function handler(req, res) {
     const completed = req.body.completed;
 
     if (description) {
+      console.log(description);
       await updateTodo(id, description);
       res.send();
       return;

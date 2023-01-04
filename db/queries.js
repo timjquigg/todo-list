@@ -1,45 +1,38 @@
-import pg from ".";
+import prisma from ".";
 
 export async function getTodos() {
-  const queryString = `
-    SELECT * 
-    FROM todos;
-  `;
-  const data = await pg.query(queryString);
-  return data.rows;
+  const data = await prisma.todo.findMany();
+  return data;
 }
 
 export async function createTodo(description) {
-  const queryString = `
-    INSERT INTO todos 
-    (description)
-    VALUES ($1)
-    RETURNING *;
-  `;
-  const queryParams = [description];
-  const data = await pg.query(queryString, queryParams);
-  return data.rows;
+  const data = await prisma.todo.create({
+    data: {
+      description,
+    },
+  });
+  return data;
 }
 
 export async function getTodoById(id) {
-  const queryString = `
-    SELECT * 
-    FROM todos 
-    WHERE id = $1;
-  `;
-  const queryParams = [id];
-  const data = await pg.query(queryString, queryParams);
-  return data.rows;
+  const data = await prisma.todo.findUnique({
+    where: {
+      id: +id,
+    },
+  });
+  return data;
 }
 
 export async function updateTodo(id, description) {
-  const queryString = `
-    UPDATE todos
-    SET description = $1
-    WHERE id = $2;
-  `;
-  const queryParams = [description, id];
-  return await pg.query(queryString, queryParams);
+  console.log(id, description);
+  return await prisma.todo.update({
+    where: {
+      id: +id,
+    },
+    data: {
+      description: description,
+    },
+  });
 }
 
 export async function deleteTodo(id) {
