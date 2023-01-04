@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     const data = await createTodo(req.body.description);
-    res.status(200).send(data.slice(-1)[0]);
+    res.status(200).send(data);
     return;
   }
 }

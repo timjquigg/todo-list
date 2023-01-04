@@ -31,13 +31,13 @@ export default function TodoListItem(props) {
 
   const cancel = (e) => {
     const currentTarget = e.currentTarget;
-    const nextElementSibling = currentTarget.nextElementSibling;
-    const nextElementSibling2 = nextElementSibling.nextElementSibling;
-
+    const nextElementSibling =
+      currentTarget.nextElementSibling.nextElementSibling;
     requestAnimationFrame(() => {
       // Check if the new focused element is a child of the original container
       if (!nextElementSibling2.contains(document.activeElement)) {
         // Do blur logic here!
+        console.log("hello");
         setDescription(props.description);
         setIsSelected(false);
       }
