@@ -24,24 +24,22 @@ export async function getTodoById(id) {
 }
 
 export async function updateTodo(id, description) {
-  console.log(id, description);
   return await prisma.todo.update({
     where: {
       id: +id,
     },
     data: {
-      description: description,
+      description,
     },
   });
 }
 
 export async function deleteTodo(id) {
-  const queryString = `
-    DELETE FROM todos
-    WHERE id = $1;
-  `;
-  const queryParams = [id];
-  return await pg.query(queryString, queryParams);
+  return await prisma.todo.delete({
+    where: {
+      id: +id,
+    },
+  });
 }
 
 export async function toggleComplete(id, completed) {
@@ -51,5 +49,13 @@ export async function toggleComplete(id, completed) {
     WHERE id = $2;
     `;
   const queryParams = [completed, id];
-  return await pg.query(queryString, queryParams);
+
+  return await prisma.todo.update({
+    where: {
+      id: +id,
+    },
+    data: {
+      completed,
+    },
+  });
 }

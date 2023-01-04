@@ -19,7 +19,6 @@ export default async function handler(req, res) {
     const completed = req.body.completed;
 
     if (description) {
-      console.log(description);
       await updateTodo(id, description);
       res.send();
       return;

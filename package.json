@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "reset": "psql -U development -d todos < ./db/schema.sql && psql -U development -d todos < ./db/seeds.sql"
+    "reset": "npx prisma migrate reset"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -21,7 +21,6 @@
     "eslint": "8.30.0",
     "eslint-config-next": "13.0.7",
     "next": "13.0.7",
-    "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
@@ -31,5 +30,8 @@
   },
   "devDependencies": {
     "prisma": "^4.8.0"
+  },
+  "prisma": {
+    "seed": "node db/seed.js"
   }
 }
