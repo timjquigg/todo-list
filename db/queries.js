@@ -43,13 +43,6 @@ export async function deleteTodo(id) {
 }
 
 export async function toggleComplete(id, completed) {
-  const queryString = `
-    UPDATE "Todo"
-    SET completed = $1
-    WHERE id = $2;
-    `;
-  const queryParams = [completed, id];
-
   return await prisma.todo.update({
     where: {
       id: +id,
